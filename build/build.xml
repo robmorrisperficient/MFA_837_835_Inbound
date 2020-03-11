@@ -1,0 +1,99 @@
+<project name="IIBBuild" default="buildbar" basedir=".">
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="${antcotrib}"/>
+		</classpath>
+	</taskdef>
+
+	<property	  name="logfile" 			 value = "${basedir}/dist/Build.log"/>
+	<property file="build.properties"/>
+
+	<condition property="buildCon">
+		<not>
+			<equals arg1="${barFileName}" arg2="NA"/>
+		</not>
+	</condition>
+
+	<target name="buildbar">
+		<antcall target="cleanAll" />
+		<antcall target="createBar" />
+		<antcall target="setenv" />
+	</target>
+
+	<!-- Cleans the entire contents of dist directory -->
+	<target name="cleanAll" description="Cleans all files in dist">
+		<delete dir="${dist.dir}" includes="**" />
+		<delete dir="${src.dir}/.metadata" />
+	</target>
+
+	<target name="createBar" if="buildCon">
+
+		<echo message="Building IIB archive file : ${barFileName}.bar "/>
+		<echo message="Source Directory : ${src.dir} "/>
+
+		<exec executable="${iib.base}/mqsicreatebar.exe" spawn="false" failonerror="true" logError="true" vmlauncher="false" append="true">
+			<arg value="-data"/>
+			<arg value="${src.dir}"/>
+			<arg value="-b"/>
+			<arg value="${dist.dir}/${barFileName}.bar"/>
+			<arg value="-cleanBuild"/>
+			<arg value="-a"/>
+			<arg value="${barFileName}"/>
+			<arg value="-deployAsSource"/>
+			<arg value="-skipWSErrorCheck"/>
+			<arg value="-trace"/>
+			<arg value="-v"/>
+			<arg value="${logfile}"/>
+		</exec>
+		<echo message="completed building Bar File. Bar file is in the location :-"/>
+		<echo message="${dist.dir}/${barFileName}.bar"/>
+	</target>
+
+
+	<target name="setenv">
+
+		<foreach list="${env}" delimiter="," param="env" target="overridebar" inheritall="true"/>
+
+	</target>
+
+	<target name="overridebar">
+		<property 	  name="propertiesfile" 	 value = "${barFileName}_${env}.properties"/>
+		<property     name="overridebarfilename" value = "${barFileName}_${env}.bar"/>
+		<echo message="Overriding broker archive file :- ${barFileName}.bar" />
+		<echo message="Environment -  ${env}" />
+		<echo message="Properties file - ${propertiesfile}" />
+		<exec executable="${iib.bin}/mqsiprofile" spawn="false" failonerror="true" logError="true" vmlauncher="false" append="true">
+			<arg value="&amp;" />
+			<arg value="${iib.bin}/mqsiapplybaroverride" />
+			<arg value="-b" />
+			<arg value="${dist.dir}/${barFileName}.bar" />
+			<arg value="-k" />
+			<arg value="${barFileName}" />
+			<arg value="-p" />
+			<arg value="${propertiesfile}" />
+			<arg value="-o" />
+			<arg value="${dist.dir}/${overridebarfilename}" />
+			<arg value="-r" />
+			<arg value="-v" />
+			<arg value="${logfile}" />
+		</exec>
+		<echo message="Completed overriding broker archive file : ${barFileName}.bar" />
+		<echo message="Updated bar file: ${overridebarfilename}" />
+		<!--<delete file="${dist.dir}/${applicationName}/${applicationName}.bar"/> -->
+	</target>
+
+	<target name="override">
+		<antcall target="setenv" />
+	</target>
+
+	<target name="deploy">
+		<antcall target="deploybar"/>
+	</target>
+
+	<target name="buildandDeploy">
+
+		<antcall target="buildbar"/>
+		<antcall target="overridebar"/>
+		<antcall target="deploybar"/>
+	</target>
+</project>

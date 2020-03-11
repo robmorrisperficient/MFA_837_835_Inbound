@@ -1,0 +1,11 @@
+CREATE FILTER MODULE MF_InboundMessage_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	IF(Environment.TradingPartnerType = 'EMDEON') OR (Environment.TradingPartnerType = 'MEDICARE') THEN
+		RETURN TRUE;
+	ELSE
+		RETURN FALSE;
+	END IF;
+END;
+
+END MODULE;
