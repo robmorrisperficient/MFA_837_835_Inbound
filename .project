@@ -6,6 +6,7 @@
 		<project>EDI_Inbound_SharedLib</project>
 		<project>MFA_InboundMessageJava</project>
 		<project>LIB_837_835_Inbound_Shared</project>
+		<project>MFA_837_835_InboundJava</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

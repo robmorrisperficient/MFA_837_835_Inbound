@@ -22,13 +22,13 @@
       <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="378,182">
         <translation xmi:type="utility:ConstantString" string="Route To Label"/>
       </nodes>
-      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="115,291" labelName="SendGAL">
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="142,287" labelName="SendGAL">
         <translation xmi:type="utility:ConstantString" string="Send to GAL"/>
       </nodes>
-      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="387,339" labelName="SendEmail">
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="148,351" labelName="SendEmail">
         <translation xmi:type="utility:ConstantString" string="Send Email"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="521,339" queueName="MQ.ESS.EMAIL.DELIVERY">
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="255,351" queueName="MQ.ESS.EMAIL.DELIVERY">
         <translation xmi:type="utility:ConstantString" string="MQ.ESS.EMAIL.DELIVERY"/>
       </nodes>
       <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="121,410" labelName="SendEventLogging">
@@ -51,7 +51,7 @@
       <nodes xmi:type="ComIbmJMSClientOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="701,78" destinationQueueName="JMS.ESB.IN.835.FILE.EDIFECS" useDistList="true" locationJndiBindings="file:/C:/JNDI-Directory/" connectionFactoryName="CF.JMS.ESB.IN.837.FILE.EDIFECS" messageType="jms_text">
         <translation xmi:type="utility:ConstantString" string="JMS Output"/>
       </nodes>
-      <nodes xmi:type="com_bcbsma_b2b_utils_SUB_GAL_LOGGER.subflow:FCMComposite_1" xmi:id="FCMComposite_1_16" location="232,291">
+      <nodes xmi:type="com_bcbsma_b2b_utils_SUB_GAL_LOGGER.subflow:FCMComposite_1" xmi:id="FCMComposite_1_16" location="263,287">
         <translation xmi:type="utility:ConstantString" string="SUB_GAL_LOGGER"/>
       </nodes>
       <nodes xmi:type="com_bcbsma_b2b_utils_SUB_ExceptionHandler.subflow:FCMComposite_1" xmi:id="FCMComposite_1_5" location="148,197">
